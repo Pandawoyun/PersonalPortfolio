@@ -1,3 +1,11 @@
+/*____________________________________________
+
+A library dealing with bubbles
+
+Coded by Bob Zhu
+
+_____________________________________________
+*/
 (function(window,undefined){
     var counter = 0;
 
