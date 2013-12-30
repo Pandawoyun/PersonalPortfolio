@@ -1,62 +1,110 @@
+
 window.onload = function () {
-    bub("holder_outer").draw(50,50,30,20,100,100);
-/*
-    //define the namespace that ill be using throughout
-    (function(Personal,$,undefined){
-        function Bubble(size_x,size_y){
-            this.size_x = size_x;
-            this.size_y= size_y;
+
+    var W = window.innerWidth;
+    var H = window.innerHeight;
+
+    window.defaultSize = {W : W, H: H};
+
+    window.paper = Raphael( 0,0,W,H );
+
+    window.bubbleSet = [bub(50,50,20,40,1000,1)];
+
+    window.needle = needle( 80, 100 );
+
+
+    $(window).mousedown(function(event) {
+        if( event.which === 1 ){
+
+            window.bomb = bombs( event );
+        }
+    })
+    .mouseup(function(event) {
+        if( event.which === 1 ){
+            window.bomb.explode( event );
 
         }
-    }).(window.Personal = window.Personal || {}, jQuery);
+    });
 
-    //create 10 divs in holder_outer
-    var paper,elememt,holder_number;
-    var divs = new Array();
-    for (var i = 0; i < 10; i++) {
-        divs[i] = "<div class='holders' id='holder#" + (i+1) + "'></div>";
-        $("#holder_outer").append(divs[i]);
 
-        holder_number = "holder#" + (i+1);
-            paper = Raphael(holder_number, 300, 300);
-            element = paper.ellipse(100,100,30,20);
+    var currentIndex = 0;
+
+    var triggerCurrent = function( radius ){
+        $.each( bubbleSet, function(index, bub) {
+            bub.a = vector( radius, 0.0025 );
+
+            bub.resist = -0.002;
+            bub.move();
+
+
+        });
+
+    };
+    var haveRest = function( ){
+        $.each( bubbleSet, function(index, bub) {
+            bub.a = 0;
+
+            bub.resist = -0.002;
+            bub.move();
+        });
+
     };
 
-    //implement animation for every one of them
+    var getCurrent = function(){
 
-    var x = 30;
-    var y = 20;
-    var xup_or_down = 1;
-    setInterval(function(){
-        //bubble movement part
-        //////////////////////////////////
-        //change direction?
-        if(x == 30 && y == 20){
-            xup_or_down = 1;
+        switch( currentIndex ){
+
+            case 0:
+                //up
+                $('#current').html("<p>going up</p>");
+                triggerCurrent( Math.PI * 3 / 2 );
+                break;
+            case 1:
+                //down
+                $('#current').html("<p>going down</p>");
+
+                triggerCurrent( Math.PI / 2 );
+                break;
+
+            case 2:
+                $('#current').html("<p>no current</p>");
+
+                haveRest();
+                break;
+            case 3:
+                //left
+                $('#current').html("<p>going left</p>");
+
+                triggerCurrent( Math.PI );
+                break;
+            case 4:
+                //right
+                $('#current').html("<p>going right</p>");
+
+                triggerCurrent( Math.PI * 2 );
+                break;
+            case 5:
+                $('#current').html("<p>no current</p>");
+
+                haveRest();
+                break;
+
+
         }
-        else if(x == 20 && y == 30){
-            xup_or_down = 0
-        }
-        //what's the direction
-        if(xup_or_down == 0){
-            x++;
-            y--;
+
+        if( currentIndex === 5 ){
+            currentIndex = 0;
         }
         else{
-            x--;
-            y++;
+            currentIndex++;
         }
-        element.animate({rx: x, ry: y},45);
-        ////////////////////////////////////////
-        
-    }, 45);
-}
 
-function bubble(){
 
-}
+    }
+        getCurrent();
+        setInterval( getCurrent, 10000 );
 
-function bubbleMove(){
 
-*/
+
+
 }
