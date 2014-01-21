@@ -13,7 +13,7 @@ _____________________________________________
 
     bombs.fn = bombs.prototype = {
         init:function( event ){
-            this.I0 = 40;
+            this.I0 = window.bombPower;
             this.level = 1;
 
             // this.circle = window.paper.circle( event.pageX, event.pageY, 5 );
@@ -33,7 +33,7 @@ _____________________________________________
 
                 // y();
 
-                this.level += 0.2;             
+                this.level += 0.2;
             }, this);
             this.lvlUp = setInterval(f, 100);
 
@@ -44,7 +44,9 @@ _____________________________________________
 
             var I0 = this.I0 * this.level;
             
-            this.range = window.paper.circle( event.pageX, event.pageY, 1 );
+            this.range = window.paper.circle( event.pageX, event.pageY, 1 ).attr({
+                stroke: "rgb(100%, 45%, 0%)"
+            });
             var r = {r: I0};
 
             this.range.animate( r, 300, "<" );
@@ -77,8 +79,6 @@ _____________________________________________
 
 
                 bub.speed = v2.plus( bub.speed );
-                bub.resist = -0.002;
-                bub.move();
 
 
 

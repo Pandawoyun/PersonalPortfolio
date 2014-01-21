@@ -1,3 +1,5 @@
+
+
 <html>
 <head>
 	<script type="text/javascript" src="javascript/jq.js"></script>
@@ -6,32 +8,22 @@
 	<script type="text/javascript" src="javascript/vector.js"></script>
 	<script type="text/javascript" src="javascript/bombs.js"></script>
 	<script type="text/javascript" src="javascript/needle.js"></script>
+	<script type="text/javascript" src="javascript/whirlPool.js"></script>
 	<script type="text/javascript" src="javascript/main.js"></script>
+	<link rel="stylesheet" type="text/css" href="main.css">
 
-	<style type="text/css">
-	div{
-		margin: 0;
-		padding: 0
-	}
-	</style>
 
 <script type="text/javascript">
 
-// window.onload = afunction () {
-// 	var a = vector( Math.PI / 2 , 1 ),
-// 		b = vector( 0, 1 );
-// 	a.plus(b);
-
-
-
-// 	console.log( "important: " +  a.mag + " " + a.radius * 180 / Math.PI );
-// }
 </script>
 
 
 </head>
 <body>
-<div id="current">  </div>
+
+ <div id="current">  </div>
+ <div id="CP">Control Panel</div>
+
 </body>
 
 

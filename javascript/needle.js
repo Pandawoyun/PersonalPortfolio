@@ -13,11 +13,12 @@ _____________________________________________
 
     needle.fn = needle.prototype = {
         init:function( x,y ){
-        	this.needle = window.paper.circle( x,y,1);
+        	this.need = window.paper.circle( x,y,1);
         	this.pos = { x: x, y: y };    
         },
         remove:function( ){
-        	this.needle.remove();
+        	this.need.remove();
+            this.pos = {};
         }
     };
 
