@@ -2,7 +2,8 @@ Project name: Bub in the journey( bob(my name) in the journey ) :)
 
 Live website: 
 
-Technologies: JavaScript (about 1000 lines)
+Technologies: 
+              JavaScript (about 1000 lines)
               library: Raphael.js for SVG implementation
                        jQuery.js for almost everything
                        
