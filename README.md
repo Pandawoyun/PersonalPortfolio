@@ -1,4 +1,4 @@
-Project name: Bub in the journey( bob(my name) in the journey ) :)
+Project name: Bub in the journey ( bob (my name) in the journey ) :)
 
 Live website: 
 
