@@ -1,6 +1,6 @@
 Project name: Bub in the journey ( bob (my name) in the journey ) :)
 
-Live website: 
+Live website: www.bobzhuop.com
 
 Technologies: 
               JavaScript (about 1000 lines)
