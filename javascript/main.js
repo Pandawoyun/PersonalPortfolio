@@ -1,6 +1,7 @@
 
 window.onload = function () {
 
+
     window.requestAnimFrame = (function(callback) {
         return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
         function(callback) {
@@ -13,14 +14,16 @@ window.onload = function () {
     var H = window.innerHeight;
 
     $('#CP').hover(function() {
+        console.log( "triggered");
         $.ajax({
-            url: 'http://localhost/PersonalPortfolio/ControlPanel/ControlPanel.html',
+            url: 'http://www.bobzhuop.com/ControlPanel/ControlPanel.html',
             type: 'GET',
             dataType: 'html',
         })
         .done(function( data ) {
+            console.log( "wotun:" + data );
             $('#CP').html( data );
-            $.getScript( 'http://localhost/PersonalPortfolio/ControlPanel/ControlPanel.js' );
+            $.getScript( 'http://www.bobzhuop/ControlPanel/ControlPanel.js' );
         })
         .fail(function() {
             console.log("error");
@@ -36,7 +39,7 @@ window.onload = function () {
 
     window.defaultSize = {W : W, H: H};
 
-    window.paper = Raphael( 0,0,W,H );
+    window.paper = Raphael( "container",W,H );
 
     //whirl
 
@@ -54,29 +57,30 @@ window.onload = function () {
     window.bubbleSet = [bub(50,50,20,40,1000,1)];
 
 //handling needle
-    window.Needle = needle( Math.random() * W, Math.random() * H );
+    window.Needle = needle( W - 100, H - 100 );
 
     var moveNeedle = function(){
-        window.Needle.remove();
-        window.Needle = needle( Math.random() * W, Math.random() * H );
+        if( window.introMode !== true ){
+            window.Needle.remove();
+            window.Needle = needle( Math.random() * W, Math.random() * H );
+        }
     }
 
     setInterval( moveNeedle, 5000 );
 //finish needle
-
 //bombs
-    $(window).mousedown(function(event) {
-        if( event.which === 1 ){
+        $("#container").mousedown(function(event) {
+            console.log( "down");
+            if( event.which === 1 ){
+                window.bomb = bombs( event );
+            }
+        })
+        .mouseup(function(event) {
+            if( event.which === 1 ){
+                window.bomb.explode( event );
 
-            window.bomb = bombs( event );
-        }
-    })
-    .mouseup(function(event) {
-        if( event.which === 1 ){
-            window.bomb.explode( event );
-
-        }
-    });
+            }
+        });
 
 //current
     var currentIndex = Math.floor( Math.random() * 5 );
@@ -129,8 +133,10 @@ window.onload = function () {
     }
 
     var changeCurrent = function(){
-        currentIndex = Math.floor( Math.random() * 5 );
-        getCurrent();
+        if( window.introMode !== true ){
+            currentIndex = Math.floor( Math.random() * 5 );
+            getCurrent();
+        }
     }
 
         getCurrent();

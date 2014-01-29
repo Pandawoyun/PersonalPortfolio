@@ -40,7 +40,7 @@ _____________________________________________
             this.dots = [];
 
             var canvas = "<div id=whirl" + this.index + "><canvas id=w" + this.index + " width=" + 2 * r  + " height=" + 2 * r + "></canvas></div>";
-            $('body').prepend( canvas );
+            $('#container').prepend( canvas );
 
             $('#whirl' + this.index).css({
                 top: y - this.r,
@@ -80,11 +80,12 @@ _____________________________________________
             var getWhirl = $.proxy(
 
                 function( dotA ){
-                    var whirl = this;
-                    whirl.context.clearRect(0, 0, whirl.canvas.width, whirl.canvas.height);
-                    this.context.translate( this.r, this.r );
-                    this.context.rotate( 3 * Math.PI / 180 );
-                    this.context.translate( -this.r, -this.r );
+                    if( window.introMode !== true ){
+                        var whirl = this;
+                        whirl.context.clearRect(0, 0, whirl.canvas.width, whirl.canvas.height);
+                        this.context.translate( this.r, this.r );
+                        this.context.rotate( 3 * Math.PI / 180 );
+                        this.context.translate( -this.r, -this.r );
                         $.each( dotA, function(index, dot) {
                                  /* iterate through array or object */
                             if( whirl.into === 1 ){
@@ -114,6 +115,7 @@ _____________________________________________
 
                             }
                         });
+                    }
 
 
                     //console.log( dot.ys + " " + dot.y);
