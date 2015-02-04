@@ -210,7 +210,7 @@ _____________________________________________
             var intro = this;
             var stageThreeDiv = "<div id='stageThreeDiv' width=" + window.innerWidth  + " height=" + window.innerHeight + "></div>";
             $('#introduction').prepend( stageThreeDiv );
-            
+            $('#introduction').css('pointer-events', 'all');
 
             var currentParas = {
                 'x':100,
