@@ -50,8 +50,6 @@ _____________________________________________
                 var bub = this;
 
             	this.shapeAni = setInterval( function(){ 
-                    console.log( "init: " + window.introMode );
-                    if( window.introMode !== true ){
                 		bub.ellipse.animate( attrs[ xup ], ms );
                 		
                 		if( xup === 0 ){
@@ -60,7 +58,7 @@ _____________________________________________
                 		else{
                 			xup = 0;
                 		}
-                    }
+                    
             	
             	}, ms );
 
@@ -72,8 +70,7 @@ _____________________________________________
 
             var f = $.proxy(
                 function(){
-                    console.log( "move: " + window.introMode );
-                    if( window.introMode !== true ){
+                    
                         var PI = Math.PI;
 
                         if( this.a !== 0 ){
@@ -165,46 +162,47 @@ _____________________________________________
                         
                         
                         var bub = this;
-                        $.each( window.whirls, function(index, whirl) {
-                            var dx = bub.cx - whirl.x,
-                                dy = bub.cy - whirl.y,
-                                D = Math.sqrt( Math.pow( dx, 2 ) + Math.pow( dy, 2 )),
-                                Range = 3 * whirl.r;
+                        if(window.whirls){
+                            $.each( window.whirls, function(index, whirl) {
+                                var dx = bub.cx - whirl.x,
+                                    dy = bub.cy - whirl.y,
+                                    D = Math.sqrt( Math.pow( dx, 2 ) + Math.pow( dy, 2 )),
+                                    Range = 3 * whirl.r;
 
 
-                            if( D < Range ){
+                                if( D < Range ){
 
-                                var radius =  Math.acos( Math.abs( dx )/D );
+                                    var radius =  Math.acos( Math.abs( dx )/D );
 
-                                if( dx < 0 && dy > 0 ){
-                                    radius = 2 * Math.PI - radius;
+                                    if( dx < 0 && dy > 0 ){
+                                        radius = 2 * Math.PI - radius;
+                                    }
+                                    else if( dx > 0 && dy > 0 ){
+                                        radius = Math.PI + radius;
+                                    }
+                                    else if( dx > 0 && dy < 0 ){
+                                        radius = Math.PI - radius;
+                                    }
+
+                                    if( whirl.into === -1 ){
+                                        radius += Math.PI;
+                                    }
+
+                                    var para = ( Range - D ) / Range,
+                                        finalF = whirl.f * para / bub.mass,
+                                        Wv = vector( radius, finalF );
+
+
+                                    bub.speed = Wv.plus( bub.speed );
+
+                                    if( D < whirl.r / 3 && whirl.into === 1 ){
+                                        var jumpTo = window.whirlout[ Math.floor( Math.random() * window.whirlout.length )];
+                                        bub.teleport( window.whirls[ jumpTo ].x, window.whirls[ jumpTo ].y );
+                                        return false;
+                                    }
                                 }
-                                else if( dx > 0 && dy > 0 ){
-                                    radius = Math.PI + radius;
-                                }
-                                else if( dx > 0 && dy < 0 ){
-                                    radius = Math.PI - radius;
-                                }
-
-                                if( whirl.into === -1 ){
-                                    radius += Math.PI;
-                                }
-
-                                var para = ( Range - D ) / Range,
-                                    finalF = whirl.f * para / bub.mass,
-                                    Wv = vector( radius, finalF );
-
-
-                                bub.speed = Wv.plus( bub.speed );
-
-                                if( D < whirl.r / 3 && whirl.into === 1 ){
-                                    var jumpTo = window.whirlout[ Math.floor( Math.random() * window.whirlout.length )];
-                                    bub.teleport( window.whirls[ jumpTo ].x, window.whirls[ jumpTo ].y );
-                                    return false;
-                                }
-                            }
-                        });
-                    }
+                            });
+                        }
                 }, this);
 
             var movement = setInterval(f,10);
@@ -212,7 +210,6 @@ _____________________________________________
 
         },
         blast:function( fileName ){
-            console.log( this.speed );
             var after = { rx: this.ellipse.attr( "rx" ) * 2, ry: this.ellipse.attr( "ry" ) * 2 }
             this.ellipse.animate( after, 100, "<" );
             var remove = $.proxy( function(){

@@ -6,7 +6,6 @@
 		position: fixed;
 		bottom: 0;
 		right: 0;
-		
 		z-index: 100;
 	}
 	#current{
@@ -32,4 +31,48 @@
 		height: 100%;
 		z-index: 300;
 		position: absolute;
+	}
+	button#skipIntro{
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+	button#skip2s2{
+		position: absolute;
+		top: 0;
+		right: 100;
+	}
+	div.dialog{
+		display: none;
+		position: absolute;
+		border-radius: 15px;
+		background-color: white;
+
+	}
+	
+	div#introduction span{
+		display: none;
+		margin: 1px;
+	}
+	div#introduction span:first-child{
+		margin-left: 10px;
+	}
+
+	html { font-size: 62.5%; }
+	body { font-size: 1em;}
+
+	@media (max-width: 300px) {
+	    html { font-size: 70%; }
+	}
+
+	@media (min-width: 500px) {
+	    html { font-size: 80%; }
+	}
+
+	@media (min-width: 700px) {
+	    html { font-size: 120%; }
+	}
+
+	@media (min-width: 1200px) {
+	    html { font-size: 150%; }
 	}

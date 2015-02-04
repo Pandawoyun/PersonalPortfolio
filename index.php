@@ -16,13 +16,11 @@
 	<script type="text/javascript" src="javascript/bombs.js"></script>
 	<script type="text/javascript" src="javascript/needle.js"></script>
 	<script type="text/javascript" src="javascript/whirlPool.js"></script>
-	<script type="text/javascript" src="javascript/main.js"></script>
 	<script type="text/javascript" src="javascript/introduction.js"></script>
+	<script type="text/javascript" src="javascript/dialog.js"></script>
+	<script type="text/javascript" src="javascript/notiRect.js"></script>
+	<script type="text/javascript" src="javascript/init.js"></script>
 	<link rel="stylesheet" type="text/css" href="main.css">
-
-
-
-
 </head>
 <body>
 <div id="container">
@@ -31,13 +29,16 @@
 </div>
 
 <script type="text/javascript">
-
+window.onload = function () {
+	window.init = window.init();
+	init.introduction();
+}
 </script>
 
 <?php
 	if( $first  ){
 		
-		echo "<script type='text/javascript'>introduction();</script>";
+		//echo "<script type='text/javascript'>introduction();</script>";
 	}
 ?>
 </body>

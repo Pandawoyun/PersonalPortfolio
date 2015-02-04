@@ -57,12 +57,21 @@ window.onload = function () {
     window.bubbleSet = [bub(50,50,20,40,1000,1)];
 
 //handling needle
-    window.Needle = needle( W - 100, H - 100 );
+    window.needStart = {
+        'x': W - 100,
+        'y': H - 100
+    }
+    window.Needle = needle( window.needStart['x'], window.needStart['y'] );
 
     var moveNeedle = function(){
         if( window.introMode !== true ){
             window.Needle.remove();
-            window.Needle = needle( Math.random() * W, Math.random() * H );
+            var nextpos = {
+                'x':Math.random() * W, 
+                'y':Math.random() * H
+            };
+            window.Needle = needle( nextpos['x'], nextpos['y'] );
+            notiRect(nextpos['x'], nextpos['y'], 400);
         }
     }
 
@@ -70,7 +79,6 @@ window.onload = function () {
 //finish needle
 //bombs
         $("#container").mousedown(function(event) {
-            console.log( "down");
             if( event.which === 1 ){
                 window.bomb = bombs( event );
             }
@@ -139,7 +147,7 @@ window.onload = function () {
         }
     }
 
-        getCurrent();
+        //getCurrent();
         setInterval( changeCurrent , 5000 );
 //finish
 
