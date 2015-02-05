@@ -183,16 +183,17 @@ _____________________________________________
             var okCallback = function(event){
                 intro.clearStage('Two');
                 window.init.shockWave();
-                $("#container").mouseup(function(event) {
+                var waitToStage3 = function(event) {
                     if( event.which === 1 ){
-
+                        $( "#container").off('mouseup', waitToStage3);
                         setTimeout(function(){
-                            console.log("two done!");
+                            $('#introduction').css('pointer-events', 'all');
                             intro.stageThree();
                         }, 3000);
                     }
-                });
+                };
 
+                $("#container").mouseup(waitToStage3);
             };
             
             var okButtonParas = {
@@ -210,7 +211,6 @@ _____________________________________________
             var intro = this;
             var stageThreeDiv = "<div id='stageThreeDiv' width=" + window.innerWidth  + " height=" + window.innerHeight + "></div>";
             $('#introduction').prepend( stageThreeDiv );
-            $('#introduction').css('pointer-events', 'all');
 
             var currentParas = {
                 'x':100,
