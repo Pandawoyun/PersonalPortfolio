@@ -224,7 +224,7 @@ _____________________________________________
 
             var controlParas = {
                 'x':intro.canvas.width - 400,
-                'y':intro.canvas.height - 100,
+                'y':intro.canvas.height - 200,
                 'width':200,
                 'height':200,
                 'id':"controlDialog",
