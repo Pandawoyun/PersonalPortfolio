@@ -1,5 +1,7 @@
-A HTML 5 web game from last winter term break
+PersonalPortfolio(Under Construction)
+=================
 
-Technology: Ajax for the controlpanel, jQuery, Raphael.js, SVG and Canvas animation
+Technology: JavaScript(module pattern, Raphael for the bubbles)
 
-live website, try it it's fun!: http://pandawoyun.github.io/PersonalPortfolio/
+Theme: sea with bubbles
+
